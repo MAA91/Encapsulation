@@ -43,9 +43,13 @@ namespace Encapsulation
         public Point(double x = 0, double y = 0)
         {
             this.x = x;
-            this.Y = y; 
+            this.y = y;
+            Console.WriteLine($"Constructor:\t{GetHashCode()}");
         }
-
+        ~Point()
+        {
+            Console.WriteLine($"Distructor:\t{GetHashCode()}");
+        }
         public double Distance(Point other)
         {
             return Math.Sqrt((this.x - other.x) * (this.x - other.x) + (this.y - other.y) * (this.y - other.y));
