@@ -46,11 +46,61 @@ namespace Encapsulation
             this.y = y;
             Console.WriteLine($"Constructor:\t{GetHashCode()}");
         }
+        public Point(Point other)
+        {
+            X = other.X;
+            Y = other.Y;
+            Console.WriteLine($"CopyConstructor:\t{GetHashCode()}");
+        }
         ~Point()
         {
             Console.WriteLine($"Distructor:\t{GetHashCode()}");
         }
 
+        //Operator
+        public static Point operator+(Point left, Point right)
+        {
+            Point res = new Point(left.X + right.X, left.Y + right.Y);
+            return res;
+        }
+        public static Point operator -(Point left, Point right)
+        {
+            return left + (-right);
+        }
+        public static Point operator++(Point obj)
+        {
+            obj.X++;
+            obj.Y++;
+            return obj;
+        }
+        public static Point operator--(Point obj)
+        {
+            obj.X--;
+            obj.Y--;
+            return obj;
+        }
+        public static Point operator -(Point right)
+        {
+            right.X = -right.X;
+            right.Y = -right.Y;
+            return right;
+        }
+        public static Point operator +(Point right)
+        {
+            return right;
+        }
+
+        public static bool operator==(Point left, Point right)
+        {
+             return (left.X == right.X) && (left.Y == right.Y);
+        }
+        public static bool operator !=(Point left, Point right)
+        {
+            return !(left == right);
+        }
+
+
+        //Metods
         public void Print()
         {
             Console.WriteLine($"X = {X}, Y = {Y}");
