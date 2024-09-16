@@ -14,6 +14,8 @@ namespace Encapsulation
             Point B = new Point(6, 6);
             Console.WriteLine(A.Distance(B));
             Console.WriteLine(Point.Distance(A, B));
+
+            
         }
     }
 }

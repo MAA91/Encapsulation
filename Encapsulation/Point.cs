@@ -50,13 +50,18 @@ namespace Encapsulation
         {
             Console.WriteLine($"Distructor:\t{GetHashCode()}");
         }
+
+        public void Print()
+        {
+            Console.WriteLine($"X = {X}, Y = {Y}");
+        }
         public double Distance(Point other)
         {
             return Math.Sqrt((this.x - other.x) * (this.x - other.x) + (this.y - other.y) * (this.y - other.y));
         }
         public static double Distance(Point A, Point B)
         {
-            return Math.Sqrt((A.x - B.x) * (A.x - B.x) + (A.y - B.y) * (A.y - B.y));
+            return A.Distance(B);
         }
     }
 }
