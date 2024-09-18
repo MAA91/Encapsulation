@@ -148,7 +148,8 @@ namespace Encapsulation
             right.Integer--;
             return right;
         }
-        
+        //операторы +=, -=, *=, /= перегружаются не явно
+
         public static bool operator== (Fraction left, Fraction right)
         {
             return left.Decimal() == right.Decimal();
