@@ -79,19 +79,34 @@ namespace Encapsulation
             else if (Integer == 0) res += "0";
             return res;
         }
-        Fraction Improper()
+        public Fraction Improper()
         {
             Fraction copy = new Fraction(this);
             copy.Numenator += copy.Integer * copy.Denominator;
             copy.Integer = 0;
             return copy;
         }
-        Fraction Proper()
+        public Fraction Proper()
         {
             Fraction copy = new Fraction(this);
             copy.Integer += copy.Numenator / copy.Denominator;
             copy.Numenator %= copy.Denominator;
             return copy;
+        }
+        public Fraction Reduction()
+        {
+            for (int i = 2; i < Math.Min(Numenator, Denominator);)
+                if (((Numenator % i) == 0) && ((Denominator % i) == 0))
+                {
+                    Numenator /= i;
+                    Denominator /= i;
+                }
+                else i++;
+            return this;
+        }
+        public double Decimal()
+        {
+            return Integer + (double)Numenator/Denominator;
         }
 
         //Operators
@@ -100,7 +115,63 @@ namespace Encapsulation
             Fraction left = l.Improper();
             Fraction right = r.Improper();
             Fraction result = new Fraction(left.Numenator * right.Numenator, left.Denominator * right.Denominator);
-            return result;
+            return result.Reduction();
+        }
+        public static Fraction operator / (Fraction l, Fraction r)
+        {
+            Fraction left = l.Improper();
+            Fraction right = r.Improper();
+            Fraction result = new Fraction(left.Numenator * right.Denominator, left.Denominator * right.Numenator);
+            return result.Reduction();
+        }
+        public static Fraction operator + (Fraction l, Fraction r)
+        {
+            Fraction left = l.Improper();
+            Fraction right = r.Improper();
+            Fraction result = new Fraction(left.Numenator * right.Denominator + right.Numenator * left.Denominator, left.Denominator * right.Denominator);
+            return result.Reduction();
+        }
+        public static Fraction operator - (Fraction l, Fraction r)
+        {
+            Fraction left = l.Improper();
+            Fraction right = r.Improper();
+            Fraction result = new Fraction(left.Numenator * right.Denominator - right.Numenator * left.Denominator, left.Denominator * right.Denominator);
+            return result.Reduction();
+        }
+        public static Fraction operator++ (Fraction right)
+        {
+            right.Integer++;
+            return right;
+        }
+        public static Fraction operator-- (Fraction right)
+        {
+            right.Integer--;
+            return right;
+        }
+        
+        public static bool operator== (Fraction left, Fraction right)
+        {
+            return left.Decimal() == right.Decimal();
+        }
+        public static bool operator!= (Fraction left, Fraction right)
+        {
+            return !(left == right);
+        }
+        public static bool operator > (Fraction left, Fraction right)
+        {
+            return left.Decimal() > right.Decimal();
+        }
+        public static bool operator < (Fraction left, Fraction right)
+        {
+            return left.Decimal() > right.Decimal();
+        }
+        public static bool operator<= (Fraction left, Fraction right)
+        {
+            return !(left > right);
+        }
+        public static bool operator>= (Fraction left, Fraction right)
+        {
+            return !(left < right);
         }
     }
 }

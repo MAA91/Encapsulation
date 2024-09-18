@@ -24,7 +24,8 @@ namespace Encapsulation
 
             Fraction A = new Fraction(2, 3, 4);
             Fraction B = new Fraction(3, 4, 5);
-            Fraction C = new Fraction(A * B);
+            Fraction C = new Fraction(A - B);
+            A *= B;
             Console.WriteLine(A);
             Console.WriteLine(B);
             Console.WriteLine(C);
